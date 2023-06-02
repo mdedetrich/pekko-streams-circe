@@ -4,6 +4,7 @@ name := "pekko-streams-circe"
 
 val scala213Version = "2.13.10"
 val scala212Version = "2.12.17"
+val scala3Version   = "3.3.0"
 
 ThisBuild / resolvers += Resolver.ApacheMavenSnapshotsRepo
 
@@ -13,8 +14,8 @@ val pekkoHttpVersion = "0.0.0+4411-6fe04045-SNAPSHOT"
 val jawnVersion      = "1.5.0"
 val scalaTestVersion = "3.2.16"
 
-ThisBuild / crossScalaVersions   := Seq(scala212Version, scala213Version)
-ThisBuild / scalaVersion         := (ThisBuild / crossScalaVersions).value.last
+ThisBuild / crossScalaVersions   := Seq(scala212Version, scala213Version, scala3Version)
+ThisBuild / scalaVersion         := scala213Version
 ThisBuild / organization         := "org.mdedetrich"
 ThisBuild / mimaFailOnNoPrevious := false // Set this to true when we start caring about binary compatibility
 ThisBuild / versionScheme        := Some(VersionScheme.EarlySemVer)
@@ -24,7 +25,7 @@ lazy val streamJson = project
   .settings(
     name := "pekko-stream-json",
     libraryDependencies ++= Seq(
-      "org.apache.pekko" %% "pekko-stream" % pekkoVersion % Provided,
+      "org.apache.pekko" %% "pekko-stream" % pekkoVersion,
       "org.typelevel"    %% "jawn-parser"  % jawnVersion
     )
   )
@@ -34,8 +35,8 @@ lazy val httpJson = project
   .settings(
     name := "pekko-http-json",
     libraryDependencies ++= Seq(
-      "org.apache.pekko" %% "pekko-stream" % pekkoVersion     % Provided,
-      "org.apache.pekko" %% "pekko-http"   % pekkoHttpVersion % Provided
+      "org.apache.pekko" %% "pekko-stream" % pekkoVersion,
+      "org.apache.pekko" %% "pekko-http"   % pekkoHttpVersion
     )
   )
   .dependsOn(streamJson)
@@ -45,7 +46,7 @@ lazy val streamCirce = project
   .settings(
     name := "pekko-stream-circe",
     libraryDependencies ++= Seq(
-      "org.apache.pekko" %% "pekko-stream" % pekkoVersion % Provided,
+      "org.apache.pekko" %% "pekko-stream" % pekkoVersion,
       "io.circe"         %% "circe-jawn"   % circeVersion
     )
   )
@@ -56,7 +57,7 @@ lazy val httpCirce = project
   .settings(
     name := "pekko-http-circe",
     libraryDependencies ++= Seq(
-      "org.apache.pekko" %% "pekko-http" % pekkoHttpVersion % Provided
+      "org.apache.pekko" %% "pekko-http" % pekkoHttpVersion
     )
   )
   .dependsOn(streamCirce, httpJson)
@@ -94,10 +95,6 @@ ThisBuild / scalacOptions ++= Seq(
   "-deprecation", // warning and location for usages of deprecated APIs
   "-feature",     // warning and location for usages of features that should be imported explicitly
   "-unchecked",   // additional warnings where generated code depends on assumptions
-  "-Xlint",       // recommended additional warnings
-  "-Xcheckinit", // runtime error when a val is not initialized due to trait hierarchies (instead of NPE somewhere else)
-  "-Ywarn-value-discard", // Warn when non-Unit expression results are unused
-  "-Ywarn-dead-code",
   "-language:postfixOps"
 )
 
@@ -125,19 +122,27 @@ ThisBuild / pomIncludeRepository   := (_ => false)
 
 val flagsFor12 = Seq(
   "-Xlint:_",
+  "-Xcheckinit", // runtime error when a val is not initialized due to trait hierarchies (instead of NPE somewhere else)
   "-Ywarn-infer-any",
   "-Ywarn-adapted-args", // Warn if an argument list is modified to match the receiver
   "-Ywarn-inaccessible",
   "-Ywarn-infer-any",
+  "-Ywarn-value-discard", // Warn when non-Unit expression results are unused
+  "-Ywarn-dead-code",
   "-opt-inline-from:<sources>",
   "-opt:l:inline"
 )
 
 val flagsFor13 = Seq(
   "-Xlint:_",
+  "-Xcheckinit", // runtime error when a val is not initialized due to trait hierarchies (instead of NPE somewhere else)
+  "-Ywarn-value-discard", // Warn when non-Unit expression results are unused
+  "-Ywarn-dead-code",
   "-opt-inline-from:<sources>",
   "-opt:l:inline"
 )
+
+val flagsFor3 = Seq.empty
 
 ThisBuild / scalacOptions ++= {
   CrossVersion.partialVersion(scalaVersion.value) match {
@@ -145,6 +150,8 @@ ThisBuild / scalacOptions ++= {
       flagsFor13
     case Some((2, n)) if n == 12 =>
       flagsFor12
+    case Some((3, _)) =>
+      Seq.empty
   }
 }
 
