@@ -1,13 +1,15 @@
 import com.jsuereth.sbtpgp.PgpKeys.publishSigned
 
-name := "akka-streams-json"
+name := "pekko-streams-circe"
 
 val scala213Version = "2.13.10"
 val scala212Version = "2.12.17"
 
+ThisBuild / resolvers += Resolver.ApacheMavenSnapshotsRepo
+
 val circeVersion     = "0.14.5"
-val akkaVersion      = "2.6.20"
-val akkaHttpVersion  = "10.2.10"
+val pekkoVersion     = "0.0.0+26669-ec5b6764-SNAPSHOT"
+val pekkoHttpVersion = "0.0.0+4411-6fe04045-SNAPSHOT"
 val jawnVersion      = "1.5.0"
 val scalaTestVersion = "3.2.16"
 
@@ -20,20 +22,20 @@ ThisBuild / versionScheme        := Some(VersionScheme.EarlySemVer)
 lazy val streamJson = project
   .in(file("stream-json"))
   .settings(
-    name := "akka-stream-json",
+    name := "pekko-stream-json",
     libraryDependencies ++= Seq(
-      "com.typesafe.akka" %% "akka-stream" % akkaVersion % Provided,
-      "org.typelevel"     %% "jawn-parser" % jawnVersion
+      "org.apache.pekko" %% "pekko-stream" % pekkoVersion % Provided,
+      "org.typelevel"    %% "jawn-parser"  % jawnVersion
     )
   )
 
 lazy val httpJson = project
   .in(file("http-json"))
   .settings(
-    name := "akka-http-json",
+    name := "pekko-http-json",
     libraryDependencies ++= Seq(
-      "com.typesafe.akka" %% "akka-stream" % akkaVersion     % Provided,
-      "com.typesafe.akka" %% "akka-http"   % akkaHttpVersion % Provided
+      "org.apache.pekko" %% "pekko-stream" % pekkoVersion     % Provided,
+      "org.apache.pekko" %% "pekko-http"   % pekkoHttpVersion % Provided
     )
   )
   .dependsOn(streamJson)
@@ -41,10 +43,10 @@ lazy val httpJson = project
 lazy val streamCirce = project
   .in(file("support") / "stream-circe")
   .settings(
-    name := "akka-stream-circe",
+    name := "pekko-stream-circe",
     libraryDependencies ++= Seq(
-      "com.typesafe.akka" %% "akka-stream" % akkaVersion % Provided,
-      "io.circe"          %% "circe-jawn"  % circeVersion
+      "org.apache.pekko" %% "pekko-stream" % pekkoVersion % Provided,
+      "io.circe"         %% "circe-jawn"   % circeVersion
     )
   )
   .dependsOn(streamJson)
@@ -52,9 +54,9 @@ lazy val streamCirce = project
 lazy val httpCirce = project
   .in(file("support") / "http-circe")
   .settings(
-    name := "akka-http-circe",
+    name := "pekko-http-circe",
     libraryDependencies ++= Seq(
-      "com.typesafe.akka" %% "akka-http" % akkaHttpVersion % Provided
+      "org.apache.pekko" %% "pekko-http" % pekkoHttpVersion % Provided
     )
   )
   .dependsOn(streamCirce, httpJson)
@@ -75,10 +77,10 @@ lazy val tests = project
   .settings(
     libraryDependencies ++=
       List(
-        "com.typesafe.akka" %% "akka-stream"   % akkaVersion      % Test,
-        "com.typesafe.akka" %% "akka-http"     % akkaHttpVersion  % Test,
-        "org.scalatest"     %% "scalatest"     % scalaTestVersion % Test,
-        "io.circe"          %% "circe-generic" % circeVersion     % Test
+        "org.apache.pekko" %% "pekko-stream"  % pekkoVersion     % Test,
+        "org.apache.pekko" %% "pekko-http"    % pekkoHttpVersion % Test,
+        "org.scalatest"    %% "scalatest"     % scalaTestVersion % Test,
+        "io.circe"         %% "circe-generic" % circeVersion     % Test
       ),
     publish / skip       := true,
     publishSigned / skip := true,
@@ -103,10 +105,10 @@ Defaults.itSettings
 
 configs(IntegrationTest)
 
-ThisBuild / homepage := Some(url("https://github.com/mdedetrich/akka-streams-json"))
+ThisBuild / homepage := Some(url("https://github.com/mdedetrich/pekko-streams-circe"))
 
 ThisBuild / scmInfo := Some(
-  ScmInfo(url("https://github.com/mdedetrich/akka-streams-json"), "git@github.com:mdedetrich/akka-streams-json.git")
+  ScmInfo(url("https://github.com/mdedetrich/pekko-streams-circe"), "git@github.com:mdedetrich/pekko-streams-circe.git")
 )
 
 ThisBuild / developers := List(

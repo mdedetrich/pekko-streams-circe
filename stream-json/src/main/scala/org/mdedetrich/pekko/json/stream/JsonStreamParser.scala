@@ -15,14 +15,15 @@
  * limitations under the License.
  */
 
-package org.mdedetrich.akka.json.stream
+package org.mdedetrich.pekko.json.stream
 
-import akka.NotUsed
-import akka.stream.Attributes.name
-import akka.stream.scaladsl.{Flow, Keep, Sink}
-import akka.stream.stage.{GraphStage, GraphStageLogic, InHandler, OutHandler}
-import akka.stream._
-import akka.util.ByteString
+import org.apache.pekko
+import pekko.NotUsed
+import pekko.stream.Attributes.name
+import pekko.stream.scaladsl.{Flow, Keep, Sink}
+import pekko.stream.stage.{GraphStage, GraphStageLogic, InHandler, OutHandler}
+import pekko.stream._
+import pekko.util.ByteString
 import org.typelevel.jawn.AsyncParser.ValueStream
 import org.typelevel.jawn._
 

@@ -15,16 +15,17 @@
  * limitations under the License.
  */
 
-package org.mdedetrich.akka.stream
+package org.mdedetrich.pekko.stream
 package support
 
-import akka.NotUsed
-import akka.stream.scaladsl.Flow
-import akka.util.ByteString
+import org.apache.pekko
+import pekko.NotUsed
+import pekko.stream.scaladsl.Flow
+import pekko.util.ByteString
 import io.circe.CursorOp.DownField
 import io.circe.jawn.CirceSupportParser._
 import io.circe._
-import org.mdedetrich.akka.json.stream.JsonStreamParser
+import org.mdedetrich.pekko.json.stream.JsonStreamParser
 import org.typelevel.jawn.AsyncParser
 
 trait CirceStreamSupport {

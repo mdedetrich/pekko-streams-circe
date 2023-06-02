@@ -15,13 +15,14 @@
  * limitations under the License.
  */
 
-package org.mdedetrich.akka.http
+package org.mdedetrich.pekko.http
 
-import akka.http.scaladsl.model.HttpEntity
-import akka.http.scaladsl.model.MediaTypes.`application/json`
-import akka.http.scaladsl.unmarshalling.{FromEntityUnmarshaller, Unmarshaller}
-import akka.http.scaladsl.util.FastFuture
-import org.mdedetrich.akka.json.stream.JsonStreamParser
+import org.apache.pekko
+import pekko.http.scaladsl.model.HttpEntity
+import pekko.http.scaladsl.model.MediaTypes.`application/json`
+import pekko.http.scaladsl.unmarshalling.{FromEntityUnmarshaller, Unmarshaller}
+import pekko.http.scaladsl.util.FastFuture
+import org.mdedetrich.pekko.json.stream.JsonStreamParser
 import org.typelevel.jawn.Facade
 
 trait JsonSupport {

@@ -15,16 +15,17 @@
  * limitations under the License.
  */
 
-package org.mdedetrich.akka.http.support
+package org.mdedetrich.pekko.http.support
 
-import akka.http.scaladsl.marshalling.{Marshaller, ToEntityMarshaller}
-import akka.http.scaladsl.model.MediaTypes.`application/json`
-import akka.http.scaladsl.unmarshalling.FromEntityUnmarshaller
+import org.apache.pekko
+import pekko.http.scaladsl.marshalling.{Marshaller, ToEntityMarshaller}
+import pekko.http.scaladsl.model.MediaTypes.`application/json`
+import pekko.http.scaladsl.unmarshalling.FromEntityUnmarshaller
 import io.circe.jawn.CirceSupportParser._
 import io.circe.{Decoder, Encoder, Json, Printer}
 
-import org.mdedetrich.akka.http.JsonSupport
-import org.mdedetrich.akka.stream.support.CirceStreamSupport
+import org.mdedetrich.pekko.http.JsonSupport
+import org.mdedetrich.pekko.stream.support.CirceStreamSupport
 
 trait CirceHttpSupport extends JsonSupport {
 

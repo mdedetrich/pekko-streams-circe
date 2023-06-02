@@ -15,20 +15,21 @@
  * limitations under the License.
  */
 
-package org.mdedetrich.akka.http
+package org.mdedetrich.pekko.http
 
-import akka.actor.ActorSystem
-import akka.http.scaladsl.marshalling.Marshal
-import akka.http.scaladsl.model.HttpCharsets.`UTF-8`
-import akka.http.scaladsl.model.MediaTypes.`application/json`
-import akka.http.scaladsl.model.{HttpEntity, RequestEntity, UniversalEntity}
-import akka.http.scaladsl.unmarshalling.Unmarshal
-import akka.stream.scaladsl.{Keep, Sink, Source}
-import akka.util.ByteString
+import org.apache.pekko
+import pekko.actor.ActorSystem
+import pekko.http.scaladsl.marshalling.Marshal
+import pekko.http.scaladsl.model.HttpCharsets.`UTF-8`
+import pekko.http.scaladsl.model.MediaTypes.`application/json`
+import pekko.http.scaladsl.model.{HttpEntity, RequestEntity, UniversalEntity}
+import pekko.http.scaladsl.unmarshalling.Unmarshal
+import pekko.stream.scaladsl.{Keep, Sink, Source}
+import pekko.util.ByteString
 import io.circe.generic.semiauto._
 import io.circe.{Decoder, Encoder, Printer}
-import org.mdedetrich.akka.http.support.CirceHttpSupport
-import org.mdedetrich.akka.stream.support.CirceStreamSupport
+import org.mdedetrich.pekko.http.support.CirceHttpSupport
+import org.mdedetrich.pekko.stream.support.CirceStreamSupport
 import org.scalatest._
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AsyncWordSpec
