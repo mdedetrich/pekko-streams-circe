@@ -75,7 +75,7 @@ class JsonSupportSpec
       |  ]
       |}""".stripMargin.trim
 
-  implicit val system = ActorSystem()
+  implicit val system: ActorSystem = ActorSystem()
 //  implicit val mat    = system
 
   "enable marshalling of an A for which an Encoder[A] exists" can {
