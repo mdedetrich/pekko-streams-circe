@@ -27,7 +27,7 @@ libraryDependencies ++= List(
 )
 ```
 
-`pekko-stream-circe` is published for Scala 2.12, 2.13 and 3.
+`pekko-stream-circe` is published for Scala 2.12, 2.13 and 3.3+.
 
 ## Usage
 
