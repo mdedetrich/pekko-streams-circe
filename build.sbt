@@ -9,7 +9,7 @@ val scala3Version   = "3.3.0"
 ThisBuild / resolvers += Resolver.ApacheMavenSnapshotsRepo
 
 val circeVersion     = "0.14.5"
-val pekkoVersion     = "1.0.0"
+val pekkoVersion     = "1.0.1"
 val pekkoHttpVersion = "0.0.0+4468-963bd592-SNAPSHOT"
 val jawnVersion      = "1.5.0"
 val scalaTestVersion = "3.2.16"
