@@ -87,6 +87,10 @@ jobs:
       - name: Setup sbt
         uses: sbt/setup-sbt@v1
 
+      - name: 'Linter: Scalafix checks'
+        shell: bash
+        run: sbt '++ ${{ matrix.scala }}' 'scalafixAll --check'
+
       - name: Install sbt
         if: matrix.os == 'macos-latest'
         shell: bash
