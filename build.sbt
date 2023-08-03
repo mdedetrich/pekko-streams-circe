@@ -12,11 +12,10 @@ val pekkoHttpVersion = "1.0.0"
 val jawnVersion      = "1.5.0"
 val scalaTestVersion = "3.2.16"
 
-ThisBuild / crossScalaVersions   := Seq(scala212Version, scala213Version, scala3Version)
-ThisBuild / scalaVersion         := scala213Version
-ThisBuild / organization         := "org.mdedetrich"
-ThisBuild / mimaFailOnNoPrevious := false // Set this to true when we start caring about binary compatibility
-ThisBuild / versionScheme        := Some(VersionScheme.EarlySemVer)
+ThisBuild / crossScalaVersions := Seq(scala212Version, scala213Version, scala3Version)
+ThisBuild / scalaVersion       := scala213Version
+ThisBuild / organization       := "org.mdedetrich"
+ThisBuild / versionScheme      := Some(VersionScheme.EarlySemVer)
 
 lazy val streamJson = project
   .in(file("stream-json"))
@@ -65,9 +64,11 @@ lazy val parent = project
   .dependsOn(httpJson, httpCirce)
   .aggregate(streamJson, httpJson, streamCirce, httpCirce, tests)
   .settings(
-    publish / skip       := true,
-    publishSigned / skip := true,
-    publishLocal / skip  := true
+    name                  := "pekko-streams-circe",
+    mimaPreviousArtifacts := Set.empty,
+    publish / skip        := true,
+    publishSigned / skip  := true,
+    publishLocal / skip   := true
   )
 
 lazy val tests = project
@@ -85,6 +86,7 @@ lazy val tests = project
     publishSigned / skip := true,
     publishLocal / skip  := true
   )
+  .disablePlugins(MimaPlugin)
 
 ThisBuild / scalacOptions ++= Seq(
   "-release:8",
