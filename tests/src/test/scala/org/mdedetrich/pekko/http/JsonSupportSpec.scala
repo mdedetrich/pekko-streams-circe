@@ -17,17 +17,9 @@
 
 package org.mdedetrich.pekko.http
 
-import org.apache.pekko
-import pekko.actor.ActorSystem
-import pekko.http.scaladsl.marshalling.Marshal
-import pekko.http.scaladsl.model.HttpCharsets.`UTF-8`
-import pekko.http.scaladsl.model.MediaTypes.`application/json`
-import pekko.http.scaladsl.model.{HttpEntity, RequestEntity, UniversalEntity}
-import pekko.http.scaladsl.unmarshalling.Unmarshal
-import pekko.stream.scaladsl.{Keep, Sink, Source}
-import pekko.util.ByteString
 import io.circe.generic.semiauto._
 import io.circe.{Decoder, Encoder, Printer}
+import org.apache.pekko
 import org.mdedetrich.pekko.http.support.CirceHttpSupport
 import org.mdedetrich.pekko.stream.support.CirceStreamSupport
 import org.scalatest._
@@ -37,6 +29,15 @@ import org.typelevel.jawn.{AsyncParser, ParseException}
 
 import scala.concurrent.Await
 import scala.concurrent.duration._
+
+import pekko.actor.ActorSystem
+import pekko.http.scaladsl.marshalling.Marshal
+import pekko.http.scaladsl.model.HttpCharsets.`UTF-8`
+import pekko.http.scaladsl.model.MediaTypes.`application/json`
+import pekko.http.scaladsl.model.{HttpEntity, RequestEntity, UniversalEntity}
+import pekko.http.scaladsl.unmarshalling.Unmarshal
+import pekko.stream.scaladsl.{Keep, Sink, Source}
+import pekko.util.ByteString
 
 case class Foo(bar: String, baz: Int, qux: List[Boolean])
 object Foo {
@@ -56,15 +57,15 @@ class JsonSupportSpec
     with Matchers
     with BeforeAndAfterAll {
 
-  val foo            = Foo("bar", 42, List(true, false))
-  val goodJson       = """{"bar":"bar","baz":42,"qux":[true,false]}"""
-  val incompleteJson = """{"bar":"bar","baz":42,"qux"""
-  val badJson        = """{"bar":"bar"}"""
-  val badBarJson     = """{"foo":{"bar":"bar"}}"""
-  val wrongJson      = """{"bar":"bar","baz":"forty two","qux":[]}"""
-  val wrongBarJson   = """{"foo":{"bar":"bar","baz":"forty two","qux":[]}}"""
-  val invalidJson    = """{"bar"="bar"}"""
-  val prettyJson =
+  val foo: Foo               = Foo("bar", 42, List(true, false))
+  val goodJson: String       = """{"bar":"bar","baz":42,"qux":[true,false]}"""
+  val incompleteJson: String = """{"bar":"bar","baz":42,"qux"""
+  val badJson: String        = """{"bar":"bar"}"""
+  val badBarJson: String     = """{"foo":{"bar":"bar"}}"""
+  val wrongJson: String      = """{"bar":"bar","baz":"forty two","qux":[]}"""
+  val wrongBarJson: String   = """{"foo":{"bar":"bar","baz":"forty two","qux":[]}}"""
+  val invalidJson: String    = """{"bar"="bar"}"""
+  val prettyJson: String =
     """
       |{
       |  "bar" : "bar",
