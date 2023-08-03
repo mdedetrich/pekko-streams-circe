@@ -6,7 +6,7 @@ import sbt._
 
 import scala.collection.immutable
 
-object Mima extends AutoPlugin {
+object MiMa extends AutoPlugin {
   override def requires = MimaPlugin
 
   override def trigger = allRequirements
@@ -16,10 +16,10 @@ object Mima extends AutoPlugin {
   private def previousArtifacts(projectName: String, organization: String, version: String): Set[sbt.ModuleID] = {
     val Some((major, minor)) = CrossVersion.partialVersion(version)
     val currentPatchVersion  = version.split("\\.").last
-    val stripRegex           = """(\d+)(.*)""".r
+    val strippedRegex        = """(\d+)(.*)""".r
 
     val currentPatchVersionStripped = currentPatchVersion match {
-      case stripRegex(v, _) => v.toInt
+      case strippedRegex(v, _) => v.toInt
     }
 
     if (currentPatchVersionStripped == 0)
