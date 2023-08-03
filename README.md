@@ -95,6 +95,6 @@ This code is open source software licensed under the Apache 2.0 License.
 
 [ci]: https://github.com/mdedetrich/pekko-streams-circe/actions/workflows/ci.yml?query=branch%3Amain
 [coverage]: https://coveralls.io/github/mdedetrich/pekko-streams-circe?branch=main
-[maven]: http://search.maven.org/#search|ga|1|g%3A%22org.mdedetrich%22%20AND%20%28a%3Apekko-stream-*_2.11%20OR%20a%3Apekko-http-*_2.11%20OR%20a%3Apekko-stream-*_2.12%20OR%20a%3Apekko-http-*_2.12%29
+[maven]: https://search.maven.org/search?q=g:org.mdedetrich%20AND%20(a:pekko-stream-*_2.12%20OR%20a:pekko-http-*_2.12%20OR%20a:pekko-stream-*_2.13%20OR%20a:pekko-http-*_2.13%20OR%20a:pekko-stream-*_3%20OR%20a:pekko-http-*_3)
 [gitter]: https://gitter.im/mdedetrich/pekko-streams-circe?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 [license]: https://www.apache.org/licenses/LICENSE-2.0
