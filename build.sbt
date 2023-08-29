@@ -193,6 +193,10 @@ ThisBuild / githubWorkflowPublish := Seq(
   )
 )
 
+ThisBuild / githubWorkflowBuildPreamble := Seq(
+  WorkflowStep.Sbt(List("scalafixAll --check"), name = Some("Linter: Scalafix checks"))
+)
+
 ThisBuild / githubWorkflowTargetTags ++= Seq("v*")
 ThisBuild / githubWorkflowPublishTargetBranches :=
   Seq(
@@ -204,4 +208,16 @@ ThisBuild / githubWorkflowJavaVersions := List(
   JavaSpec.temurin("8"),
   JavaSpec.temurin("11"),
   JavaSpec.temurin("17")
+)
+
+// scalafix specific settings
+inThisBuild(
+  List(
+    semanticdbEnabled          := true,
+    semanticdbVersion          := scalafixSemanticdb.revision,
+    scalafixScalaBinaryVersion := scalaBinaryVersion.value,
+    scalacOptions ++= Seq(
+      "-Ywarn-unused"
+    )
+  )
 )

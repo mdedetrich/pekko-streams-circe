@@ -7,3 +7,4 @@ addSbtPlugin("org.scoverage"                     % "sbt-scoverage"      % "2.0.8
 addSbtPlugin("org.scoverage"                     % "sbt-coveralls"      % "1.3.11")
 addSbtPlugin("com.typesafe"                      % "sbt-mima-plugin"    % "1.1.3")
 addSbtPlugin("com.github.sbt"                    % "sbt-github-actions" % "0.15.0")
+addSbtPlugin("ch.epfl.scala"                     % "sbt-scalafix"       % "0.11.0")

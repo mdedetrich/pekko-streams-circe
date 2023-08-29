@@ -18,12 +18,13 @@
 package org.mdedetrich.pekko.http
 
 import org.apache.pekko
+import org.mdedetrich.pekko.json.stream.JsonStreamParser
+import org.typelevel.jawn.Facade
+
 import pekko.http.scaladsl.model.HttpEntity
 import pekko.http.scaladsl.model.MediaTypes.`application/json`
 import pekko.http.scaladsl.unmarshalling.{FromEntityUnmarshaller, Unmarshaller}
 import pekko.http.scaladsl.util.FastFuture
-import org.mdedetrich.pekko.json.stream.JsonStreamParser
-import org.typelevel.jawn.Facade
 
 trait JsonSupport {
 
