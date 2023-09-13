@@ -4,13 +4,13 @@ name := "pekko-streams-circe"
 
 val scala213Version = "2.13.11"
 val scala212Version = "2.12.18"
-val scala3Version   = "3.3.0"
+val scala3Version   = "3.3.1"
 
-val circeVersion     = "0.14.5"
+val circeVersion     = "0.14.6"
 val pekkoVersion     = "1.0.1"
 val pekkoHttpVersion = "1.0.0"
 val jawnVersion      = "1.5.1"
-val scalaTestVersion = "3.2.16"
+val scalaTestVersion = "3.2.17"
 
 ThisBuild / crossScalaVersions := Seq(scala212Version, scala213Version, scala3Version)
 ThisBuild / scalaVersion       := scala213Version
