@@ -198,7 +198,7 @@ ThisBuild / githubWorkflowPublishTargetBranches :=
     RefPredicate.Equals(Ref.Branch("main"))
   )
 
-ThisBuild / githubWorkflowOSes := Seq("ubuntu-latest", "macos-latest")
+ThisBuild / githubWorkflowOSes := Seq("ubuntu-latest", "macos-latest", "windows-latest")
 
 ThisBuild / githubWorkflowJavaVersions := List(
   JavaSpec.temurin("8"),
