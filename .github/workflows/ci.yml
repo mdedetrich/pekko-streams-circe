@@ -22,9 +22,9 @@ jobs:
     name: Build and Test
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-latest, macos-latest]
         scala: [2.12.18, 2.13.12, 3.3.1]
-        java: [temurin@8, temurin@11, temurin@17]
+        java: [temurin@8, temurin@11, temurin@17, temurin@21]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout current branch (full)
@@ -54,6 +54,14 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
+          cache: sbt
+
+      - name: Setup Java (temurin@21)
+        if: matrix.java == 'temurin@21'
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
           cache: sbt
 
       - name: Check that workflows are up to date
@@ -118,6 +126,14 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
+          cache: sbt
+
+      - name: Setup Java (temurin@21)
+        if: matrix.java == 'temurin@21'
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
           cache: sbt
 
       - name: Download target directories (2.12.18)
