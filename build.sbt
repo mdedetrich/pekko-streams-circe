@@ -200,8 +200,11 @@ ThisBuild / githubWorkflowPublishTargetBranches :=
     RefPredicate.Equals(Ref.Branch("main"))
   )
 
+ThisBuild / githubWorkflowOSes := Seq("ubuntu-latest", "macos-latest")
+
 ThisBuild / githubWorkflowJavaVersions := List(
   JavaSpec.temurin("8"),
   JavaSpec.temurin("11"),
-  JavaSpec.temurin("17")
+  JavaSpec.temurin("17"),
+  JavaSpec.temurin("21")
 )
