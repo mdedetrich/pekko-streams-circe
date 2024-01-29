@@ -145,14 +145,18 @@ val flagsFor13 = Seq(
 val flagsFor3 = Seq.empty
 
 ThisBuild / scalacOptions ++= {
-  CrossVersion.partialVersion(scalaVersion.value) match {
-    case Some((2, n)) if n == 13 =>
-      flagsFor13
-    case Some((2, n)) if n == 12 =>
-      flagsFor12
-    case Some((3, _)) =>
-      Seq.empty
-  }
+  if (insideCI.value) {
+    val log = sLog.value
+    log.info("Running in CI, enabling Scala2 optimizer")
+    CrossVersion.partialVersion(scalaVersion.value) match {
+      case Some((2, n)) if n == 13 =>
+        flagsFor13
+      case Some((2, n)) if n == 12 =>
+        flagsFor12
+      case Some((3, _)) =>
+        Seq.empty
+    }
+  } else Seq.empty
 }
 
 IntegrationTest / parallelExecution := false
