@@ -98,10 +98,6 @@ ThisBuild / scalacOptions ++= Seq(
   "-language:postfixOps"
 )
 
-Defaults.itSettings
-
-configs(IntegrationTest)
-
 ThisBuild / homepage := Some(url("https://github.com/mdedetrich/pekko-streams-circe"))
 
 ThisBuild / scmInfo := Some(
@@ -158,8 +154,6 @@ ThisBuild / scalacOptions ++= {
     }
   } else Seq.empty
 }
-
-IntegrationTest / parallelExecution := false
 
 ThisBuild / githubWorkflowTargetBranches := Seq("main") // Once we have branches per version, add the pattern here
 
