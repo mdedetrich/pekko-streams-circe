@@ -21,8 +21,9 @@ import org.apache.pekko
 import pekko.actor.ActorSystem
 import pekko.http.scaladsl.marshalling.Marshal
 import pekko.http.scaladsl.model.HttpCharsets.`UTF-8`
+import pekko.http.scaladsl.model.HttpEntity.ChunkStreamPart
 import pekko.http.scaladsl.model.MediaTypes.`application/json`
-import pekko.http.scaladsl.model.{HttpEntity, RequestEntity, UniversalEntity}
+import pekko.http.scaladsl.model.{HttpEntity, RequestEntity}
 import pekko.http.scaladsl.unmarshalling.Unmarshal
 import pekko.stream.scaladsl.{Keep, Sink, Source}
 import pekko.util.ByteString
@@ -144,6 +145,15 @@ class JsonSupportSpec
       val lazyEntity = mkEntity(goodJson)
       "produce the proper type" in {
         Unmarshal(lazyEntity).to[Foo].map {
+          _ shouldBe foo
+        }
+      }
+    }
+
+    "A valid, lazily streamed chunked json entity" should {
+      val lazyChunkedEntity = mkEntity(goodJson, chunked = true)
+      "produce the proper type" in {
+        Unmarshal(lazyChunkedEntity).to[Foo].map {
           _ shouldBe foo
         }
       }
@@ -307,12 +317,17 @@ class JsonSupportSpec
     }
   }
 
-  def mkEntity(s: String, strict: Boolean = false): UniversalEntity =
+  def mkEntity(s: String, strict: Boolean = false, chunked: Boolean = false): HttpEntity =
     if (strict) {
       HttpEntity(`application/json`, s)
     } else {
-      val source = Source.fromIterator(() => s.grouped(8).map(ByteString(_)))
-      HttpEntity(`application/json`, s.length.toLong, source)
+      if (chunked) {
+        val source = Source.fromIterator(() => s.grouped(1).map(bs => ChunkStreamPart(ByteString(bs))))
+        HttpEntity.Chunked(`application/json`, source)
+      } else {
+        val source = Source.fromIterator(() => s.grouped(8).map(ByteString(_)))
+        HttpEntity(`application/json`, s.length.toLong, source)
+      }
     }
 
   override def afterAll(): Unit = {
