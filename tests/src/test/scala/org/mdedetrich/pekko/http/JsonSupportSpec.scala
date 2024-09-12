@@ -249,7 +249,7 @@ class JsonSupportSpec
         )
 
         futureException.map {
-          _.getMessage shouldBe "head of empty stream"
+          _.getMessage shouldBe "No complete json entity consumed"
         }
 
       }
