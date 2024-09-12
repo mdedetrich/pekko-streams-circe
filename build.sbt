@@ -12,10 +12,11 @@ val pekkoHttpVersion = "1.0.1"
 val jawnVersion      = "1.6.0"
 val scalaTestVersion = "3.2.19"
 
-ThisBuild / crossScalaVersions := Seq(scala212Version, scala213Version, scala3Version)
-ThisBuild / scalaVersion       := scala213Version
-ThisBuild / organization       := "org.mdedetrich"
-ThisBuild / versionScheme      := Some(VersionScheme.EarlySemVer)
+ThisBuild / crossScalaVersions     := Seq(scala212Version, scala213Version, scala3Version)
+ThisBuild / scalaVersion           := scala213Version
+ThisBuild / organization           := "org.mdedetrich"
+ThisBuild / versionScheme          := Some(VersionScheme.EarlySemVer)
+ThisBuild / versionPolicyIntention := Compatibility.BinaryCompatible
 
 lazy val streamJson = project
   .in(file("stream-json"))
@@ -158,7 +159,7 @@ ThisBuild / scalacOptions ++= {
 ThisBuild / githubWorkflowTargetBranches := Seq("main") // Once we have branches per version, add the pattern here
 
 ThisBuild / githubWorkflowBuild := Seq(
-  WorkflowStep.Sbt(List("mimaReportBinaryIssues"), name = Some("Report binary compatibility issues")),
+  WorkflowStep.Sbt(List("versionPolicyCheck"), name = Some("Report version policy issues")),
   WorkflowStep.Sbt(List("clean", "coverage", "test"), name = Some("Build project"))
 )
 
