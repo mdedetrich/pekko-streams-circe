@@ -7,7 +7,7 @@ val scala212Version = "2.12.20"
 val scala3Version   = "3.3.3"
 
 val circeVersion     = "0.14.10"
-val pekkoVersion     = "1.0.3"
+val pekkoVersion     = "1.1.1"
 val pekkoHttpVersion = "1.0.1"
 val jawnVersion      = "1.6.0"
 val scalaTestVersion = "3.2.19"
