@@ -17,15 +17,15 @@
 
 package org.mdedetrich.pekko.http.support
 
+import io.circe.jawn.CirceSupportParser._
+import io.circe.{Decoder, Encoder, Json, Printer}
 import org.apache.pekko
+import org.mdedetrich.pekko.http.JsonSupport
+import org.mdedetrich.pekko.stream.support.CirceStreamSupport
+
 import pekko.http.scaladsl.marshalling.{Marshaller, ToEntityMarshaller}
 import pekko.http.scaladsl.model.MediaTypes.`application/json`
 import pekko.http.scaladsl.unmarshalling.FromEntityUnmarshaller
-import io.circe.jawn.CirceSupportParser._
-import io.circe.{Decoder, Encoder, Json, Printer}
-
-import org.mdedetrich.pekko.http.JsonSupport
-import org.mdedetrich.pekko.stream.support.CirceStreamSupport
 
 trait CirceHttpSupport extends JsonSupport {
 
