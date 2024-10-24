@@ -18,15 +18,16 @@
 package org.mdedetrich.pekko.stream
 package support
 
+import io.circe.CursorOp.DownField
+import io.circe._
+import io.circe.jawn.CirceSupportParser._
 import org.apache.pekko
+import org.mdedetrich.pekko.json.stream.JsonStreamParser
+import org.typelevel.jawn.AsyncParser
+
 import pekko.NotUsed
 import pekko.stream.scaladsl.Flow
 import pekko.util.ByteString
-import io.circe.CursorOp.DownField
-import io.circe.jawn.CirceSupportParser._
-import io.circe._
-import org.mdedetrich.pekko.json.stream.JsonStreamParser
-import org.typelevel.jawn.AsyncParser
 
 trait CirceStreamSupport {
 

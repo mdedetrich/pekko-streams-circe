@@ -18,20 +18,22 @@
 package org.mdedetrich.pekko.json.stream
 
 import org.apache.pekko
+import org.typelevel.jawn.AsyncParser.ValueStream
+import org.typelevel.jawn._
+
+import java.nio.ByteBuffer
+
+import scala.annotation.tailrec
+import scala.collection.mutable.ArrayBuffer
+import scala.concurrent.Future
+import scala.util.Try
+
 import pekko.NotUsed
 import pekko.stream.Attributes.name
 import pekko.stream.scaladsl.{Flow, Keep, Sink}
 import pekko.stream.stage.{GraphStage, GraphStageLogic, InHandler, OutHandler}
 import pekko.stream._
 import pekko.util.ByteString
-import org.typelevel.jawn.AsyncParser.ValueStream
-import org.typelevel.jawn._
-
-import scala.annotation.tailrec
-import scala.collection.mutable.ArrayBuffer
-import scala.concurrent.Future
-import scala.util.Try
-import java.nio.ByteBuffer
 
 object JsonStreamParser {
 
@@ -132,9 +134,9 @@ object JsonStreamParser {
 
 final class JsonStreamParser[J: Facade] private (mode: AsyncParser.Mode, multiValue: Boolean)
     extends GraphStage[FlowShape[ByteString, J]] {
-  private[this] val in  = Inlet[ByteString]("Json.in")
-  private[this] val out = Outlet[J]("Json.out")
-  override val shape    = FlowShape(in, out)
+  private[this] val in                         = Inlet[ByteString]("Json.in")
+  private[this] val out                        = Outlet[J]("Json.out")
+  override val shape: FlowShape[ByteString, J] = FlowShape(in, out)
   override def createLogic(inheritedAttributes: Attributes): GraphStageLogic =
     new JsonStreamParser.ParserLogic[J](AsyncParser[J](mode, multiValue), shape)
 }

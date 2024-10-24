@@ -18,6 +18,11 @@
 package org.mdedetrich.pekko.http
 
 import org.apache.pekko
+import org.mdedetrich.pekko.json.stream.JsonStreamParser
+import org.typelevel.jawn.Facade
+
+import scala.concurrent.{Future, Promise}
+
 import pekko.http.scaladsl.model.HttpEntity
 import pekko.http.scaladsl.model.MediaTypes.`application/json`
 import pekko.http.scaladsl.unmarshalling.{FromEntityUnmarshaller, Unmarshaller}
@@ -25,10 +30,6 @@ import pekko.http.scaladsl.util.FastFuture
 import pekko.stream._
 import pekko.stream.scaladsl.Sink
 import pekko.stream.stage._
-import org.mdedetrich.pekko.json.stream.JsonStreamParser
-import org.typelevel.jawn.Facade
-
-import scala.concurrent.{Future, Promise}
 
 trait JsonSupport {
 
