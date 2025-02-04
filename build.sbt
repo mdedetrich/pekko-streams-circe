@@ -4,7 +4,7 @@ name := "pekko-streams-circe"
 
 val scala213Version = "2.13.16"
 val scala212Version = "2.12.20"
-val scala3Version   = "3.3.4"
+val scala3Version   = "3.3.5"
 
 val circeVersion     = "0.14.10"
 val pekkoVersion     = "1.0.3"
