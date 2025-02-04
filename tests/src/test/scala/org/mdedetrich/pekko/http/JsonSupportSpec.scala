@@ -82,18 +82,15 @@ class JsonSupportSpec
     "The marshalled entity" should {
       val futureEntity = Marshal(foo).to[RequestEntity]
 
-      "have `application/json` as content type" in {
-
+      "have `application/json` as content type" in
         futureEntity.map {
           _.contentType.mediaType shouldBe `application/json`
         }
-      }
 
-      "have UTF-8 as charset" in {
+      "have UTF-8 as charset" in
         futureEntity.map {
           _.contentType.charsetOption should contain(`UTF-8`)
         }
-      }
 
       "have the correct body" in {
         for {
@@ -109,17 +106,15 @@ class JsonSupportSpec
 
       val futureEntity = Marshal(foo).to[RequestEntity]
 
-      "have `application/json` as content type" in {
+      "have `application/json` as content type" in
         futureEntity.map {
           _.contentType.mediaType shouldBe `application/json`
         }
-      }
 
-      "have UTF-8 as charset" in {
+      "have UTF-8 as charset" in
         futureEntity.map {
           _.contentType.charsetOption should contain(`UTF-8`)
         }
-      }
 
       "have the correct body" in {
         for {
@@ -133,29 +128,26 @@ class JsonSupportSpec
   "enable unmarshalling of an A for which a Decoder[A] exists" can {
     "A valid, strict json entity" should {
       val goodEntity = mkEntity(goodJson, strict = true)
-      "produce the proper type" in {
+      "produce the proper type" in
         Unmarshal(goodEntity).to[Foo].map {
           _ shouldBe foo
         }
-      }
     }
 
     "A valid, lazily streamed json entity" should {
       val lazyEntity = mkEntity(goodJson)
-      "produce the proper type" in {
+      "produce the proper type" in
         Unmarshal(lazyEntity).to[Foo].map {
           _ shouldBe foo
         }
-      }
     }
 
     "A complete, lazily streamed json entity with superfluous content" should {
       val entity = mkEntity(goodJson + incompleteJson)
-      "produce the proper type" in {
+      "produce the proper type" in
         Unmarshal(entity).to[Foo].map {
           _ shouldBe foo
         }
-      }
     }
 
     "Multiple, lazily streamed json entities via a flow" should {
