@@ -192,6 +192,10 @@ ThisBuild / githubWorkflowPublish := Seq(
   )
 )
 
+ThisBuild / githubWorkflowBuildPreamble := Seq(
+  WorkflowStep.Sbt(List("scalafixAll --check"), name = Some("Linter: Scalafix checks"))
+)
+
 ThisBuild / githubWorkflowTargetTags ++= Seq("v*")
 ThisBuild / githubWorkflowPublishTargetBranches :=
   Seq(
@@ -219,5 +223,17 @@ ThisBuild / githubWorkflowBuildPreamble ++= Seq(
     ),
     cond = Some("matrix.os == 'macos-latest'"),
     name = Some("Install sbt")
+  )
+)
+
+// scalafix specific settings
+inThisBuild(
+  List(
+    semanticdbEnabled          := true,
+    semanticdbVersion          := scalafixSemanticdb.revision,
+    scalafixScalaBinaryVersion := scalaBinaryVersion.value,
+    scalacOptions ++= Seq(
+      "-Ywarn-unused"
+    )
   )
 )
