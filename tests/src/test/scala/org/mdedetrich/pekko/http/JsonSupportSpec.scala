@@ -64,7 +64,7 @@ class JsonSupportSpec
   val wrongJson      = """{"bar":"bar","baz":"forty two","qux":[]}"""
   val wrongBarJson   = """{"foo":{"bar":"bar","baz":"forty two","qux":[]}}"""
   val invalidJson    = """{"bar"="bar"}"""
-  val prettyJson =
+  val prettyJson     =
     """
       |{
       |  "bar" : "bar",
@@ -249,7 +249,7 @@ class JsonSupportSpec
 
     "A bad json entity" should {
       "produce a parse exception" in {
-        val badEntity = mkEntity(wrongJson, strict = true)
+        val badEntity       = mkEntity(wrongJson, strict = true)
         val futureException = recoverToExceptionIf[JsonParsingException] {
           Unmarshal(badEntity).to[Foo]
         }
@@ -258,7 +258,7 @@ class JsonSupportSpec
         }
       }
       "produce a parse exception for nested errors" in {
-        val badEntity = mkEntity(wrongBarJson, strict = true)
+        val badEntity       = mkEntity(wrongBarJson, strict = true)
         val futureException = recoverToExceptionIf[JsonParsingException] {
           Unmarshal(badEntity).to[Bar]
         }
@@ -267,7 +267,7 @@ class JsonSupportSpec
         }
       }
       "produce a parse exception with the message 'field missing'" in {
-        val badEntity = mkEntity(badJson, strict = true)
+        val badEntity       = mkEntity(badJson, strict = true)
         val futureException = recoverToExceptionIf[JsonParsingException] {
           Unmarshal(badEntity).to[Foo]
         }
@@ -276,7 +276,7 @@ class JsonSupportSpec
         }
       }
       "produce a parse exception with the message 'field missing' for nested errors" in {
-        val badEntity = mkEntity(badBarJson, strict = true)
+        val badEntity       = mkEntity(badBarJson, strict = true)
         val futureException = recoverToExceptionIf[JsonParsingException] {
           Unmarshal(badEntity).to[Bar]
         }
