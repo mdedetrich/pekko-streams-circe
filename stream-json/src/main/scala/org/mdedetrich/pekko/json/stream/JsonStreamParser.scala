@@ -113,7 +113,7 @@ object JsonStreamParser {
         val next   = bs.next()
         val absorb = parser.absorb(next)
         absorb match {
-          case Left(e) => failStage(e)
+          case Left(e)      => failStage(e)
           case Right(jsons) =>
             if (jsons.nonEmpty) {
               results ++= jsons
@@ -132,9 +132,9 @@ object JsonStreamParser {
 
 final class JsonStreamParser[J: Facade] private (mode: AsyncParser.Mode, multiValue: Boolean)
     extends GraphStage[FlowShape[ByteString, J]] {
-  private[this] val in  = Inlet[ByteString]("Json.in")
-  private[this] val out = Outlet[J]("Json.out")
-  override val shape    = FlowShape(in, out)
+  private[this] val in                                                       = Inlet[ByteString]("Json.in")
+  private[this] val out                                                      = Outlet[J]("Json.out")
+  override val shape                                                         = FlowShape(in, out)
   override def createLogic(inheritedAttributes: Attributes): GraphStageLogic =
     new JsonStreamParser.ParserLogic[J](AsyncParser[J](mode, multiValue), shape)
 }
