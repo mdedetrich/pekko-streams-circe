@@ -3,16 +3,15 @@ import com.jsuereth.sbtpgp.PgpKeys.publishSigned
 name := "pekko-streams-circe"
 
 val scala213Version = "2.13.18"
-val scala212Version = "2.12.21"
 val scala3Version   = "3.3.7"
 
 val circeVersion     = "0.14.15"
-val pekkoVersion     = "1.0.3"
-val pekkoHttpVersion = "1.0.1"
+val pekkoVersion     = "2.0.0-M1"
+val pekkoHttpVersion = "2.0.0-M1"
 val jawnVersion      = "1.6.0"
 val scalaTestVersion = "3.2.20"
 
-ThisBuild / crossScalaVersions     := Seq(scala212Version, scala213Version, scala3Version)
+ThisBuild / crossScalaVersions     := Seq(scala213Version, scala3Version)
 ThisBuild / scalaVersion           := scala213Version
 ThisBuild / organization           := "org.mdedetrich"
 ThisBuild / versionScheme          := Some(VersionScheme.EarlySemVer)
@@ -90,7 +89,7 @@ lazy val tests = project
   .disablePlugins(MimaPlugin)
 
 ThisBuild / scalacOptions ++= Seq(
-  "-release:8",
+  "-release:17",
   "-encoding",
   "UTF-8",
   "-deprecation", // warning and location for usages of deprecated APIs
@@ -201,8 +200,6 @@ ThisBuild / githubWorkflowPublishTargetBranches :=
 ThisBuild / githubWorkflowOSes := Seq("ubuntu-latest", "macos-14", "macos-latest", "windows-latest")
 
 ThisBuild / githubWorkflowJavaVersions := List(
-  JavaSpec.corretto("8"),
-  JavaSpec.temurin("11"),
   JavaSpec.temurin("17"),
   JavaSpec.temurin("21"),
   JavaSpec.temurin("25")
