@@ -24,7 +24,7 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-          - macos-13
+          - macos-14
           - macos-latest
           - windows-latest
         scala: [2.12.20, 2.13.17, 3.3.7]
