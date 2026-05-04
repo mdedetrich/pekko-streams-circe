@@ -199,17 +199,13 @@ ThisBuild / githubWorkflowPublishTargetBranches :=
     RefPredicate.Equals(Ref.Branch("main"))
   )
 
-ThisBuild / githubWorkflowOSes := Seq("ubuntu-latest", "macos-13", "macos-latest", "windows-latest")
+ThisBuild / githubWorkflowOSes := Seq("ubuntu-latest", "macos-14", "macos-latest", "windows-latest")
 
 ThisBuild / githubWorkflowJavaVersions := List(
-  JavaSpec.temurin("8"),
   JavaSpec.temurin("11"),
   JavaSpec.temurin("17"),
   JavaSpec.temurin("21")
 )
-
-ThisBuild / githubWorkflowBuildMatrixExclusions +=
-  MatrixExclude(Map("java" -> "temurin@8", "os" -> "macos-latest"))
 
 // GitHub Actions macOS 13+ runner images do not come with sbt preinstalled anymore
 ThisBuild / githubWorkflowBuildPreamble ++= Seq(
