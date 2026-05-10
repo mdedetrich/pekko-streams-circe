@@ -201,6 +201,7 @@ ThisBuild / githubWorkflowPublishTargetBranches :=
 ThisBuild / githubWorkflowOSes := Seq("ubuntu-latest", "macos-14", "macos-latest", "windows-latest")
 
 ThisBuild / githubWorkflowJavaVersions := List(
+  JavaSpec.corretto("8"),
   JavaSpec.temurin("11"),
   JavaSpec.temurin("17"),
   JavaSpec.temurin("21")
