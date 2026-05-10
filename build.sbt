@@ -204,7 +204,8 @@ ThisBuild / githubWorkflowJavaVersions := List(
   JavaSpec.corretto("8"),
   JavaSpec.temurin("11"),
   JavaSpec.temurin("17"),
-  JavaSpec.temurin("21")
+  JavaSpec.temurin("21"),
+  JavaSpec.temurin("25")
 )
 
 // GitHub Actions macOS 13+ runner images do not come with sbt preinstalled anymore

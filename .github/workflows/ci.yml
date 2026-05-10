@@ -33,6 +33,7 @@ jobs:
           - temurin@11
           - temurin@17
           - temurin@21
+          - temurin@25
     runs-on: ${{ matrix.os }}
     steps:
       - name: Ignore line ending differences in git
@@ -83,6 +84,14 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
+          cache: sbt
+
+      - name: Setup Java (temurin@25)
+        if: matrix.java == 'temurin@25'
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 25
           cache: sbt
 
       - name: Setup sbt
@@ -180,6 +189,14 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
+          cache: sbt
+
+      - name: Setup Java (temurin@25)
+        if: matrix.java == 'temurin@25'
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 25
           cache: sbt
 
       - name: Setup sbt
