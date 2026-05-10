@@ -157,8 +157,7 @@ ThisBuild / scalacOptions ++= {
 ThisBuild / githubWorkflowTargetBranches := Seq("main") // Once we have branches per version, add the pattern here
 
 ThisBuild / githubWorkflowBuild := Seq(
-  // Temporarily disable version policy check while we switch from Pekko 1.0 to 2.0
-  // WorkflowStep.Sbt(List("versionPolicyCheck"), name = Some("Report version policy issues")),
+  WorkflowStep.Sbt(List("versionPolicyCheck"), name = Some("Report version policy issues")),
   WorkflowStep.Sbt(List("clean", "coverage", "test"), name = Some("Build project"))
 )
 
