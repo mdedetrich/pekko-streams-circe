@@ -3,7 +3,7 @@ import com.jsuereth.sbtpgp.PgpKeys.publishSigned
 name := "pekko-streams-circe"
 
 val scala213Version = "2.13.18"
-val scala3Version   = "3.3.7"
+val scala3Version   = "3.3.8"
 
 val circeVersion     = "0.14.17"
 val pekkoVersion     = "2.0.0-M1"
