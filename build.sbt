@@ -8,7 +8,7 @@ val scala3Version   = "3.3.7"
 val circeVersion     = "0.14.15"
 val pekkoVersion     = "2.0.0-M1"
 val pekkoHttpVersion = "2.0.0-M1"
-val jawnVersion      = "1.6.0"
+val jawnVersion      = "1.8.0"
 val scalaTestVersion = "3.2.20"
 
 ThisBuild / crossScalaVersions     := Seq(scala213Version, scala3Version)
